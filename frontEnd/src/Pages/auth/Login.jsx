@@ -25,7 +25,7 @@ export default function Login() {
 
   const onSubmit = (data) => {
     axios
-      .post(import.meta.env.VITE_SERVER_URL + "/auth/login", data)
+      .post(import.meta.env.VITE_SERVER_URL + "/auth/login", data, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.error != undefined) {
           toast.error(res.data.error);
