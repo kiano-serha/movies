@@ -41,7 +41,7 @@ export default function Navbar({ PageName, setMovies }) {
   };
 
   const handleLogout = () => {
-    Cookies.set("token","");
+    Cookies.remove("token",{path : "/", domain: "movies-dba4.vercel.app"})
     axios
       .post(import.meta.env.VITE_SERVER_URL + "/auth/logout", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
