@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { toast } from "sonner";
 import Toast from "../components/Toast";
 import Footer from "../components/Footer";
+import Cookies from "js-cookie";
 
 export default function RatingIndex() {
   axios.defaults.withCredentials = true;
@@ -17,7 +18,7 @@ export default function RatingIndex() {
   ]);
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/users/ratings")
+      .get(import.meta.env.VITE_SERVER_URL + "/users/ratings", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.message) {
           setRatings(res.data.data);
