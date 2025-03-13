@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "sonner";
 import Toast from "./Toast";
+import Cookies from "js-cookie";
 
 export default function Navbar({ PageName, setMovies }) {
   axios.defaults.withCredentials = true;
@@ -14,7 +15,7 @@ export default function Navbar({ PageName, setMovies }) {
 
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/populate/filter/" + 2)
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/populate/filter/" + 2, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.message) {
           if (res.data.message == "success") {
@@ -30,7 +31,7 @@ export default function Navbar({ PageName, setMovies }) {
   }, []);
   const onSubmit = (data) => {
     axios
-      .post(import.meta.env.VITE_SERVER_URL + "/movies/search", data)
+      .post(import.meta.env.VITE_SERVER_URL + "/movies/search", data, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         setMovies(res.data.data);
       })
@@ -41,7 +42,7 @@ export default function Navbar({ PageName, setMovies }) {
 
   const handleLogout = () => {
     axios
-      .post(import.meta.env.VITE_SERVER_URL + "/auth/logout")
+      .post(import.meta.env.VITE_SERVER_URL + "/auth/logout", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.message) {
           window.location.href = "/login";
@@ -64,7 +65,7 @@ export default function Navbar({ PageName, setMovies }) {
       .get(
         import.meta.env.VITE_SERVER_URL +
           "/movies/populate/filter/" +
-          getValues("criteria")
+          getValues("criteria"), {headers: {Authorization: 'Bearer ' + Cookies.get("token")},}
       )
       .then((res) => {
         if (res.data.message) {
