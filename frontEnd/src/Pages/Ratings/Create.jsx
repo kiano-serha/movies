@@ -47,7 +47,7 @@ export default function Create() {
 
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/" + id)
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/" + id, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data) {
           setValue("movie_title", res.data.data[0].title);
