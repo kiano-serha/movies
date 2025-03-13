@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Footer from "./components/Footer";
+import Cookies from "js-cookie";
 
 export default function Index() {
   const location = useLocation();
@@ -15,7 +16,7 @@ export default function Index() {
       window.history.replaceState({}, "");
     }
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/all")
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/all", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         setMovies(res.data.data);
       })
@@ -28,7 +29,7 @@ export default function Index() {
 
   const addWatched = (id) => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/add/watched/" + id)
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/add/watched/" + id, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.message) {
           toast.success(res.data.message);
