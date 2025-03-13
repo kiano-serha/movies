@@ -37,6 +37,6 @@ app.get("/protected", verifyUser, (req, res) => {
   return res.json(values);
 });
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server listening...");
 });
