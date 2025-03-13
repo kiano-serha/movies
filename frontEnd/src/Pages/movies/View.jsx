@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../components/Footer";
+import Cookies from "js-cookie";
 
 export default function View() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function View() {
 
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/info/" + id)
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/info/" + id, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         setMovie(res.data.movie);
         setRatings(res.data.ratings);
