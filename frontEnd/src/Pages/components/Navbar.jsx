@@ -41,6 +41,7 @@ export default function Navbar({ PageName, setMovies }) {
   };
 
   const handleLogout = () => {
+    Cookies.set("token","");
     axios
       .post(import.meta.env.VITE_SERVER_URL + "/auth/logout", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
