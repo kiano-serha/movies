@@ -3,12 +3,13 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { toast } from "sonner";
 import Footer from "../components/Footer";
+import Cookies from "js-cookie";
 
 export default function Watched() {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_SERVER_URL + "/movies/watched")
+      .get(import.meta.env.VITE_SERVER_URL + "/movies/watched", {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.data) {
           setMovies(res.data.data);
