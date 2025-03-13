@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RatingSchema from "../Validators/RatingSchema";
+import Cookies from "js-cookie";
 
 export default function Create() {
   const { id } = useParams();
@@ -30,7 +31,7 @@ export default function Create() {
 
   const onSubmit = (data) => {
     axios
-      .post(import.meta.env.VITE_SERVER_URL + "/users/add/rating", data)
+      .post(import.meta.env.VITE_SERVER_URL + "/users/add/rating", data, {headers: {Authorization: 'Bearer ' + Cookies.get("token")},})
       .then((res) => {
         if (res.data.message) {
           toast.success(res.data.message);
