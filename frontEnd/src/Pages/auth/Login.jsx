@@ -6,6 +6,8 @@ import Toast from "../components/Toast";
 import { UserContext } from "../../Contexts/UserProvider";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoginSchema from "../Validators/LoginSchema";
+import Cookies from "js-cookie";
+
 export default function Login() {
   const {
     register,
@@ -31,6 +33,7 @@ export default function Login() {
           sessionStorage.setItem("first_name", res.data.user_first_name);
           sessionStorage.setItem("last_name", res.data.user_last_name);
           sessionStorage.setItem("email_address", res.data.user_email_address);
+          Cookies.set("token", res.data.token);
           window.location.href = "/";
         }
       })
