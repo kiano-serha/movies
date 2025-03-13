@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const verifyUser = async (req, res, next) => {
-  const token = await req.cookies.token;
+  authorization = await req.headers.authorization;
+  authorization ? (token = authorization.replace("Bearer ", "")) : (token = "");
   if (!token) {
     return res.json({ error: "User not authenticated" });
   } else {
