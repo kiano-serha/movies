@@ -30,6 +30,7 @@ const login = async (req, res) => {
                   user_first_name: query_one[0][0].first_name,
                   user_last_name: query_one[0][0].last_name,
                   user_email_address: query_one[0][0].email_address,
+                  token: token,
                 });
               } else {
                 throw new Error("Error authenticating user");
