@@ -18,6 +18,7 @@
     "@mui/material": "^6.4.7",
     "@mui/styled-engine-sc": "^6.4.6",
     "axios": "^1.8.2",
+    "js-cookie": "^3.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
